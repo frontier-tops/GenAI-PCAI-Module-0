@@ -120,7 +120,7 @@ helm install --wait --generate-name \
   nvidia/gpu-operator \
   --version=v25.3.0
 
-helm list
+helm list -n gpu-operator
 
 ```
 
