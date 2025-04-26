@@ -91,6 +91,10 @@ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Doc
 
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
+kubectl get nodes
+
+kubectl get pods -A
+
 ```
 
 ## 🎯 Step 5: Install NVIDIA GPU Operator via Helm
@@ -101,8 +105,12 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 
+helm list -A
+helm repo list
+
 helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
 helm repo update
+helm repo list
 
 kubectl create namespace gpu-operator
 kubectl label --overwrite ns gpu-operator pod-security.kubernetes.io/enforce=privileged
@@ -111,6 +119,8 @@ helm install --wait --generate-name \
   -n gpu-operator --create-namespace \
   nvidia/gpu-operator \
   --version=v25.3.0
+
+helm list
 
 ```
 
